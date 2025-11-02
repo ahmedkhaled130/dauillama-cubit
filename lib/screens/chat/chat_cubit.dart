@@ -40,7 +40,6 @@ class ChatCubit extends Cubit<ChatState> {
         ),
       );
 
-  /// Load chat history
   Future<void> loadHistory() async {
     emit(state.copyWith(conversations: const Pending()));
     try {
@@ -51,7 +50,6 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
-  /// Main chat logic
   Future<void> chat() async {
     if (state.model == null) return;
     final name = state.model!.model;
@@ -115,7 +113,6 @@ class ChatCubit extends Cubit<ChatState> {
     Future.delayed(const Duration(milliseconds: 100), scrollToEnd);
   }
 
-  /// Scroll to bottom
   void scrollToEnd() {
     if (scrollController.hasClients) {
       scrollController.animateTo(
@@ -126,22 +123,18 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
-  /// Add image
   Future<void> addImage(XFile? image) async {
     emit(state.copyWith(selectedImage: image));
   }
 
-  /// Delete selected image
   void deleteImage() {
     emit(state.copyWith(selectedImage: null));
   }
 
-  /// Select specific conversation
   void selectConversation(Conversation conversation) {
     emit(state.copyWith(conversation: conversation));
   }
 
-  /// Start new conversation
   void newConversation() {
     emit(
       state.copyWith(
@@ -155,7 +148,6 @@ class ChatCubit extends Cubit<ChatState> {
     );
   }
 
-  /// Delete conversation
   Future<void> deleteConversation(Conversation deleted) async {
     await _conversationService.deleteConversation(deleted);
     emit(state.copyWith(

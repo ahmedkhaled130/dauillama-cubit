@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../model.dart';
 import '../screens/chat/chat_cubit.dart';
 import '../screens/chat/chat_state.dart';
 
@@ -29,9 +26,6 @@ class PromptFieldState extends State<PromptField> {
       padding: const EdgeInsets.all(8.0),
       color: theme.cardColor,
       child: BlocBuilder<ChatCubit, ChatState>(
-        // buildWhen: (prev, curr) =>
-        // prev.promptText != curr.promptText ||
-        //     prev.selectedImage != curr.selectedImage,
         builder: (context, state) {
           final selectedImage = state.selectedImage;
           final promptController = chatCubit.promptFieldController;
